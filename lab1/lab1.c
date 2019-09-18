@@ -14,7 +14,8 @@ int isProcessDir(const struct dirent*d) {
 	while (*tmp != '\0') {
 		if (isdigit(*tmp) != 0) {
 			return 0;
-		}	
+		}
+		tmp++;	
 	}
 	return 1;	
 }
@@ -23,15 +24,14 @@ int main(){
    struct dirent ** namelist;
    int numDirectories;
    
-   int (*checkProcess)(const struct *dirent);
-   checkProcess = isProcessDir;
-   
-   numDirectories = scandir("/proc", &namelist, checkProcess, NULL);
+   numDirectories = scandir("/proc", &namelist, isProcessDir, NULL);
    
    // Check if no directories were read    
    if (numDirectories == -1) {
-   		return 1;
+  	printf("The /proc directory could not be read"); 
+	return 1;
    }
    printf("%d", numDirectories);
    return 0;
+
 }
