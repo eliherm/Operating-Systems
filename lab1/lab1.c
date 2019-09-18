@@ -12,7 +12,7 @@ int isProcessDir(const struct dirent*d) {
 	char *tmp = d->d_name;
 
 	while (*tmp != '\0') {
-		if (isdigit(*tmp) != 0) {
+		if (isdigit(*tmp) == 0) {
 			return 0;
 		}
 		tmp++;	
@@ -34,7 +34,7 @@ int main(){
    }
    
    for (i = 0; i < numDirectories; i++) {
-   		printf("%s", namelist[i]->d_name);
+   		printf("%s \n", namelist[i]->d_name);
    }
    printf("\n");
    
