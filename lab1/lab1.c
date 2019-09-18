@@ -23,7 +23,7 @@ int main(){
    struct dirent ** namelist;
    int numDirectories;
    
-   int (* checkProcess)(struct *dirent);
+   int (*checkProcess)(const struct *dirent);
    checkProcess = isProcessDir;
    
    numDirectories = scandir("/proc", &namelist, checkProcess, NULL);
