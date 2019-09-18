@@ -23,6 +23,7 @@ int isProcessDir(const struct dirent*d) {
 int main(){
    struct dirent ** namelist;
    int numDirectories;
+   int i;
    
    numDirectories = scandir("/proc", &namelist, isProcessDir, NULL);
    
@@ -32,7 +33,7 @@ int main(){
 	return 1;
    }
    
-   for (int i = 0; i < numDirectories; i++) {
+   for (i = 0; i < numDirectories; i++) {
    		printf("%s", namelist[i]->d_name);
    }
    printf("\n");
