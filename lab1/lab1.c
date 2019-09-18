@@ -14,7 +14,8 @@ int isProcessDir(const struct dirent*d) {
 	while (*tmp != '\0') {
 		if (isdigit(*tmp) != 0) {
 			return 0;
-		}	
+		}
+		tmp++;	
 	}
 	return 1;	
 }
