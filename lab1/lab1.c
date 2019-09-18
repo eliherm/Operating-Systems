@@ -33,7 +33,7 @@ int main(){
    }
    
    for (int i = 0; i < numDirectories; i++) {
-   		printf("%d", namelist[i]->d_name);
+   		printf("%s", namelist[i]->d_name);
    }
    printf("\n");
    
