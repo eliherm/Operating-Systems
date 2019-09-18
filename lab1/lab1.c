@@ -31,7 +31,13 @@ int main(){
   	printf("The /proc directory could not be read"); 
 	return 1;
    }
-   printf("%d", numDirectories);
+   
+   for (int i = 0; i < numDirectories; i++) {
+   		printf("%d", namelist[i]->d_name);
+   }
+   printf("\n");
+   
+   
    return 0;
 
 }
