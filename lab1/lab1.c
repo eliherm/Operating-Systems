@@ -73,9 +73,9 @@ int main() {
         while (fgets(buffer, 100, process)) {
             if (strncmp(buffer, "Name", 4) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
-                char result[100];
-                splitString(buffer, result, 4);
-                strcpy(processInfo[0], result);
+                // char result[100];
+                // splitString(buffer, result, 4);
+                strcpy(processInfo[0], buffer + 6);
             } else if (strncmp(buffer, "State", 5) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
                 strcpy(processInfo[1], buffer);
