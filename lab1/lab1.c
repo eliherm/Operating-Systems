@@ -59,13 +59,12 @@ int main() {
 
         fgets(buffer[0], 100, process);
         fgets(buffer[1], 100, process);
-        process++;
         fgets(buffer[2], 100, process);
 
-        printf("%s\n", buffer[0]);
-        printf("%s\n", buffer[1]);
+        printf("%s", buffer[0]);
+        printf("%s", buffer[1]);
         printf("%s\n", buffer[2]);
-        puts("\n");
+        fclose(process);
     }
 
     // printDirectories(namelist, numDirectories);
