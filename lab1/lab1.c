@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <dirent.h>
+#include <string.h>
 #include <strings.h>
 #include <ctype.h>
 
@@ -59,16 +60,20 @@ int main() {
 
         while (fgets(buffer, 100, process)) {
             if (strncmp(buffer, "Name", 4) == 0) {
-                buffer[strlen(buffer) - 1] = '\0';
+                int location = strlen(buffer) - 1;
+                buffer[location] = '\0';
                 processInfo[0] = buffer;
             } else if (strncmp(buffer, "State", 5) == 0) {
-                buffer[strlen(buffer) - 1] = '\0';
+                int location = strlen(buffer) - 1;
+                buffer[location] = '\0';
                 processInfo[1] = buffer;
             } else if (strncmp(buffer, "Uid", 3) == 0) {
-                buffer[strlen(buffer) - 1] = '\0';
+                int location = strlen(buffer) - 1;
+                buffer[location] = '\0';
                 processInfo[2] = buffer;
             } else if (strncmp(buffer, "Gid", 3) == 0) {
-                buffer[strlen(buffer) - 1] = '\0';
+                int location = strlen(buffer) - 1;
+                buffer[location] = '\0';
                 processInfo[3] = buffer;
             }
         }
