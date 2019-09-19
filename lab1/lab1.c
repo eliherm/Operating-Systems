@@ -38,15 +38,26 @@ int main() {
 
     // Check if no directories were read
     if (numDirectories == -1) {
-        printf("The /proc directory could not be read");
-        return 1;
+        printf("The /proc directory could not be read\n");
+        exit(0);
     }
 
     int i;
     for (i = 0; i < numDirectories; i++) {
-        char path[100];
+        char path[100];  // Buffer to hold the path
+        char pName[100]; //Buffer to hold the process name
         sprintf(path, "/proc/%s/status", namelist[i]->d_name);
-        printf("%s\n", path);
+
+        FILE *process = fopen(path, "r");
+
+        // Check if the file could not be opened
+        if (process == NULL) {
+            printf("The process could not be read\n");
+            exit(0);
+        }
+
+        fgets(pName, 100, process);
+        printf("%s\n", pName);
     }
 
     // printDirectories(namelist, numDirectories);
