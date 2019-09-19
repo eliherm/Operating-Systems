@@ -71,9 +71,19 @@ int main() {
                 strcpy(processInfo[2], buffer + 7);
             } else if (strncmp(buffer, "Uid", 3) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
+
+                char *endPtr;
+                endPtr = strchr(buffer, '\t');
+                *endPtr = '\0';
+
                 strcpy(processInfo[3], buffer + 5);
             } else if (strncmp(buffer, "Gid", 3) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
+
+                char *endPtr;
+                endPtr = strchr(buffer, '\t');
+                *endPtr = '\0';
+                
                 strcpy(processInfo[4], buffer + 5);
             }
         }
