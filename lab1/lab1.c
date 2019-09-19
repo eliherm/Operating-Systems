@@ -73,18 +73,16 @@ int main() {
         while (fgets(buffer, 100, process)) {
             if (strncmp(buffer, "Name", 4) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
-                // char result[100];
-                // splitString(buffer, result, 4);
                 strcpy(processInfo[0], buffer + 6);
             } else if (strncmp(buffer, "State", 5) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
-                strcpy(processInfo[1], buffer);
+                strcpy(processInfo[1], buffer + 7);
             } else if (strncmp(buffer, "Uid", 3) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
-                strcpy(processInfo[2], buffer);
+                strcpy(processInfo[2], buffer + 5);
             } else if (strncmp(buffer, "Gid", 3) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
-                strcpy(processInfo[3], buffer);
+                strcpy(processInfo[3], buffer + 5);
             }
         }
 
