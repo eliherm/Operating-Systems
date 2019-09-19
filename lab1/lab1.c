@@ -62,19 +62,19 @@ int main() {
             if (strncmp(buffer, "Name", 4) == 0) {
                 int location = strlen(buffer) - 1;
                 buffer[location] = '\0';
-                processInfo[0] = buffer;
+                strcpy(processInfo[0], buffer);
             } else if (strncmp(buffer, "State", 5) == 0) {
                 int location = strlen(buffer) - 1;
                 buffer[location] = '\0';
-                processInfo[1] = buffer;
+                strcpy(processInfo[1], buffer);
             } else if (strncmp(buffer, "Uid", 3) == 0) {
                 int location = strlen(buffer) - 1;
                 buffer[location] = '\0';
-                processInfo[2] = buffer;
+                strcpy(processInfo[2], buffer);
             } else if (strncmp(buffer, "Gid", 3) == 0) {
                 int location = strlen(buffer) - 1;
                 buffer[location] = '\0';
-                processInfo[3] = buffer;
+                strcpy(processInfo[3], buffer);
             }
         }
 
