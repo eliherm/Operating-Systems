@@ -9,6 +9,8 @@
 #include <strings.h>
 #include <ctype.h>
 
+#define BUFFER_LEN 100
+
 int isProcessDir(const struct dirent*d) {
     char *tmp = d->d_name;
 
@@ -30,18 +32,6 @@ void printDirectories(struct dirent **directoryList, int n) {
     printf("\n");
 }
 
-void splitString(char *string, char *result, int n) {
-    int i;
-    int idx = 0;
-    for (i = n; i < strlen(string); i++) {
-        if (string[i] != ' ') {
-            result[idx] = string[i];
-            idx++;
-        }
-    }
-    result[strlen(result)] = '\0';
-}
-
 int main() {
     struct dirent ** namelist;
     int numDirectories; // Stores the number of directories read by scandir
@@ -57,9 +47,9 @@ int main() {
 
     int i;
     for (i = 0; i < numDirectories; i++) {
-        char path[100];
-        char buffer[100];
-        char processInfo[4][100];
+        char path[BUFFER_LEN];
+        char buffer[BUFFER_LEN];
+        char processInfo[5][BUFFER_LEN];
 
         sprintf(path, "/proc/%s/status", namelist[i]->d_name);
         FILE *process = fopen(path, "r");
@@ -69,28 +59,29 @@ int main() {
             printf("The process could not be read\n");
             exit(0);
         }
+        processInfo[0] = namelist[i]->d_name;
 
-        while (fgets(buffer, 100, process)) {
+        // Iterate through all lines of the file
+        while (fgets(buffer, BUFFER_LEN, process)) {
             if (strncmp(buffer, "Name", 4) == 0) {
-                buffer[strlen(buffer) - 1] = '\0';
-                strcpy(processInfo[0], buffer + 6);
+                buffer[strlen(buffer) - 1] = '\0';  // Remove the newline character
+                strcpy(processInfo[1], buffer + 6); // Copy the string without the title
             } else if (strncmp(buffer, "State", 5) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
-                strcpy(processInfo[1], buffer + 7);
+                strcpy(processInfo[2], buffer + 7);
             } else if (strncmp(buffer, "Uid", 3) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
-                strcpy(processInfo[2], buffer + 5);
+                strcpy(processInfo[3], buffer + 5);
             } else if (strncmp(buffer, "Gid", 3) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
-                strcpy(processInfo[3], buffer + 5);
+                strcpy(processInfo[4], buffer + 5);
             }
         }
 
-        printf("%s\n", processInfo[0]);
-        printf("%s\n", processInfo[1]);
-        printf("%s\n", processInfo[2]);
-        printf("%s\n", processInfo[3]);
-        printf("\n");
+        int j;
+        for (j = 0; j < 5; j++) {
+            printf("%s\t%s\t%s\t%s\t%s\n", processInfo[j]);
+        }
         fclose(process);
     }
     // printDirectories(namelist, numDirectories);
