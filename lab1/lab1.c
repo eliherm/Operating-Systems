@@ -30,6 +30,18 @@ void printDirectories(struct dirent **directoryList, int n) {
     printf("\n");
 }
 
+void splitString(char *string, char *result, int n) {
+    int i;
+    int idx = 0;
+    for (i = n; i < strlen(string); i++) {
+        if (string[i] != ' ') {
+            result[idx] = string[i];
+            idx++;
+        }
+    }
+    result[strlen(result)] = '\0';
+}
+
 int main() {
     struct dirent ** namelist;
     int numDirectories; // Stores the number of directories read by scandir
@@ -61,8 +73,9 @@ int main() {
         while (fgets(buffer, 100, process)) {
             if (strncmp(buffer, "Name", 4) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
-                strstr(buffer, buffer + 5);
-                strcpy(processInfo[0], buffer);
+                char result[100];
+                splitString(buffer, result, 4);
+                strcpy(processInfo[0], result);
             } else if (strncmp(buffer, "State", 5) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
                 strcpy(processInfo[1], buffer);
