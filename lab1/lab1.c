@@ -59,7 +59,7 @@ int main() {
             printf("The process could not be read\n");
             exit(0);
         }
-        processInfo[0] = namelist[i]->d_name;
+        strcpy(processInfo[0], namelist[i]->d_name);
 
         // Iterate through all lines of the file
         while (fgets(buffer, BUFFER_LEN, process)) {
@@ -78,10 +78,7 @@ int main() {
             }
         }
 
-        int j;
-        for (j = 0; j < 5; j++) {
-            printf("%s\t%s\t%s\t%s\t%s\n", processInfo[j]);
-        }
+        printf("%s\t%s\t%s\t%s\t%s\n", processInfo[0], processInfo[1], processInfo[2], processInfo[3], processInfo[4]);
         fclose(process);
     }
     // printDirectories(namelist, numDirectories);
