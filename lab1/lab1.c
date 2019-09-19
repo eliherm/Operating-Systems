@@ -46,6 +46,7 @@ int main() {
     for (i = 0; i < numDirectories; i++) {
         char path[100];  // Buffer to hold the path
         char pName[100]; //Buffer to hold the process name
+        char buffer[4][100]; //Buffer to hold the process name
         sprintf(path, "/proc/%s/status", namelist[i]->d_name);
 
         FILE *process = fopen(path, "r");
@@ -56,8 +57,15 @@ int main() {
             exit(0);
         }
 
-        fgets(pName, 100, process);
-        printf("%s\n", pName);
+        fgets(buffer[0], 100, process);
+        fgets(buffer[1], 100, process);
+        process++;
+        fgets(buffer[2], 100, process);
+
+        printf("%s\n", buffer[0]);
+        printf("%s\n", buffer[1]);
+        printf("%s\n", buffer[2]);
+        puts("\n");
     }
 
     // printDirectories(namelist, numDirectories);
