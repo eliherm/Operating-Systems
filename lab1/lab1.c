@@ -45,11 +45,11 @@ int main() {
 
     int i;
     for (i = 0; i < numDirectories; i++) {
-        char path[100];  // Buffer to hold the path
+        char path[100];
         char buffer[100];
-        char processInfo[4][100]; // Buffer to hold the process information
-        sprintf(path, "/proc/%s/status", namelist[i]->d_name);
+        char processInfo[4][100];
 
+        sprintf(path, "/proc/%s/status", namelist[i]->d_name);
         FILE *process = fopen(path, "r");
 
         // Check if the file could not be opened
@@ -61,18 +61,15 @@ int main() {
         while (fgets(buffer, 100, process)) {
             if (strncmp(buffer, "Name", 4) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
-                strcpy(processInfo[0], buffer);
+                strcpy(processInfo[0], buffer + 5);
             } else if (strncmp(buffer, "State", 5) == 0) {
-                int location = strlen(buffer) - 1;
-                buffer[location] = '\0';
+                buffer[strlen(buffer) - 1] = '\0';
                 strcpy(processInfo[1], buffer);
             } else if (strncmp(buffer, "Uid", 3) == 0) {
-                int location = strlen(buffer) - 1;
-                buffer[location] = '\0';
+                buffer[strlen(buffer) - 1] = '\0';
                 strcpy(processInfo[2], buffer);
             } else if (strncmp(buffer, "Gid", 3) == 0) {
-                int location = strlen(buffer) - 1;
-                buffer[location] = '\0';
+                buffer[strlen(buffer) - 1] = '\0';
                 strcpy(processInfo[3], buffer);
             }
         }
