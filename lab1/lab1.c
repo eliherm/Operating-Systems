@@ -33,6 +33,7 @@ int main() {
     struct dirent ** namelist;
     int numDirectories; // Stores the number of directories read by scandir
 
+
     numDirectories = scandir("/proc", &namelist, isProcessDir, NULL);
 
     // Check if no directories were read
@@ -41,6 +42,13 @@ int main() {
         return 1;
     }
 
-    printDirectories(namelist, numDirectories);
+    int i;
+    for (i = 0; i < numDirectories; i++) {
+        char path[100];
+        sprintf(path, "/proc/%s/status", namelist[i]->d_name);
+        printf("%s\n", path);
+    }
+
+    // printDirectories(namelist, numDirectories);
     return 0;
 }
