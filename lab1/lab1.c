@@ -78,7 +78,7 @@ int main() {
             }
         }
 
-        printf("%s   \t%s\t%s\t%s\t%s\n", processInfo[0], processInfo[1], processInfo[2], processInfo[3], processInfo[4]);
+        printf("%s\t%s   \t%s\t%s\t%s\n", processInfo[0], processInfo[1], processInfo[2], processInfo[3], processInfo[4]);
         fclose(process);
     }
     // printDirectories(namelist, numDirectories);
