@@ -24,6 +24,17 @@ int isProcessDir(const struct dirent*d) {
     return 1;
 }
 
+void extractFirst (char str[], char result[]) {
+    char *ptr = NULL;
+    ptr = strtok(str, "\t");
+    if (ptr == NULL) return;
+
+    for (int i = 0; i < 2; i++) {
+        ptr = strtok(NULL, "\t");
+    }
+    strcpy(result, ptr);
+}
+
 void printDirectories(struct dirent **directoryList, int n) {
     int i;
     for (i = 0; i < n; i++) {
@@ -35,7 +46,6 @@ void printDirectories(struct dirent **directoryList, int n) {
 int main() {
     struct dirent ** namelist;
     int numDirectories; // Stores the number of directories read by scandir
-
 
     numDirectories = scandir("/proc", &namelist, isProcessDir, NULL);
 
@@ -50,6 +60,8 @@ int main() {
         char path[BUFFER_LEN];
         char buffer[BUFFER_LEN];
         char processInfo[5][BUFFER_LEN];
+
+        char *ptr = NULL;
 
         sprintf(path, "/proc/%s/status", namelist[i]->d_name);
         FILE *process = fopen(path, "r");
@@ -71,10 +83,15 @@ int main() {
                 strcpy(processInfo[2], buffer + 7);
             } else if (strncmp(buffer, "Uid", 3) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
-                strcpy(processInfo[3], buffer + 5);
+                extractFirst(buffer, processInfo[3]);
+
+                // char subString[BUFFER_LEN];
+                // strcpy(processInfo[3], buffer + 5);
             } else if (strncmp(buffer, "Gid", 3) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
-                strcpy(processInfo[4], buffer + 5);
+                extractFirst(buffer, processInfo[4]);
+
+                // strcpy(processInfo[4], buffer + 5);
             }
         }
 
