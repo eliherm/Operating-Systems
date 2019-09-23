@@ -56,7 +56,7 @@ int main() {
         exit(0);
     }
 
-    printf("%-15s\t%-15s\t%-15s\t%-15s\t%-15s\n", "PID", "Name", "Status", "User", "Group");
+    printf("%-15s\t%-15s\t%-15s\t%-15s\t%-15s\n\n", "PID", "Name", "Status", "User", "Group");
 
     int i;
     for (i = 0; i < numDirectories; i++) {
