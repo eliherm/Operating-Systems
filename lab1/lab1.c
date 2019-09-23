@@ -11,6 +11,7 @@
 
 #define BUFFER_LEN 100
 
+// Checks if a directory is a process
 int isProcessDir(const struct dirent*d) {
     char *tmp = d->d_name;
 
@@ -24,6 +25,7 @@ int isProcessDir(const struct dirent*d) {
     return 1;
 }
 
+// Extract the first number from Gid and Pid
 void extractFirst (char str[], char result[]) {
     char *ptr = NULL;
     ptr = strtok(str, "\t");
@@ -34,14 +36,6 @@ void extractFirst (char str[], char result[]) {
         ptr = strtok(NULL, "\t");
     }
     strcpy(result, ptr);
-}
-
-void printDirectories(struct dirent **directoryList, int n) {
-    int i;
-    for (i = 0; i < n; i++) {
-        printf("%s \n", directoryList[i]->d_name);
-    }
-    printf("\n");
 }
 
 int main() {
@@ -56,9 +50,11 @@ int main() {
         exit(0);
     }
 
+    // Print the headings
     printf("%-15s\t%-15s\t%-15s\t%-15s\t%-15s\n", "PID", "Name", "Status", "User", "Group");
-    printf("----------------------------------------------------------------------------\n");
+    printf("------------------------------------------------------------------------\n");
 
+    // Iterates through the directories in /proc
     int i;
     for (i = 0; i < numDirectories; i++) {
         char path[BUFFER_LEN];
@@ -76,6 +72,7 @@ int main() {
         strcpy(processInfo[0], namelist[i]->d_name);
 
         // Iterate through all lines of the file
+        // Look for specific rows (Name, State, Uid, Gid)
         while (fgets(buffer, BUFFER_LEN, process)) {
             if (strncmp(buffer, "Name", 4) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';  // Remove the newline character
@@ -85,21 +82,15 @@ int main() {
                 strcpy(processInfo[2], buffer + 7);
             } else if (strncmp(buffer, "Uid", 3) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
-                extractFirst(buffer, processInfo[3]);
-
-                // char subString[BUFFER_LEN];
-                // strcpy(processInfo[3], buffer + 5);
+                extractFirst(buffer, processInfo[3]); // Places the first number into buffer
             } else if (strncmp(buffer, "Gid", 3) == 0) {
                 buffer[strlen(buffer) - 1] = '\0';
                 extractFirst(buffer, processInfo[4]);
-
-                // strcpy(processInfo[4], buffer + 5);
             }
         }
 
         printf("%-15s\t%-15s\t%-15s\t%-15s\t%-15s\n", processInfo[0], processInfo[1], processInfo[2], processInfo[3], processInfo[4]);
         fclose(process);
     }
-    // printDirectories(namelist, numDirectories);
     return 0;
 }
