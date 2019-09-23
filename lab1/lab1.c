@@ -52,7 +52,7 @@ int main() {
 
     // Print the headings
     printf("%-15s\t%-15s\t%-15s\t%-15s\t%-15s\n", "PID", "Name", "Status", "User", "Group");
-    printf("------------------------------------------------------------------------\n");
+    printf("-----------------------------------------------------------------------------\n");
 
     // Iterates through the directories in /proc
     int i;
@@ -89,7 +89,7 @@ int main() {
             }
         }
 
-        printf("%-15s\t%-15s\t%-15s\t%-15s\t%-15s\n", processInfo[0], processInfo[1], processInfo[2], processInfo[3], processInfo[4]);
+        printf("%-20s\t%-20s\t%-20s\t%-20s\t%-20s\n", processInfo[0], processInfo[1], processInfo[2], processInfo[3], processInfo[4]);
         fclose(process);
     }
     return 0;
