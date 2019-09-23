@@ -29,7 +29,8 @@ void extractFirst (char str[], char result[]) {
     ptr = strtok(str, "\t");
     if (ptr == NULL) return;
 
-    for (int i = 0; i < 2; i++) {
+    int i;
+    for (i = 0; i < 2; i++) {
         ptr = strtok(NULL, "\t");
     }
     strcpy(result, ptr);
@@ -60,8 +61,6 @@ int main() {
         char path[BUFFER_LEN];
         char buffer[BUFFER_LEN];
         char processInfo[5][BUFFER_LEN];
-
-        char *ptr = NULL;
 
         sprintf(path, "/proc/%s/status", namelist[i]->d_name);
         FILE *process = fopen(path, "r");
