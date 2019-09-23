@@ -56,6 +56,8 @@ int main() {
         exit(0);
     }
 
+    printf("%-15s\t%-15s\t%-15s\t%-15s\t%-15s\n", "PID", "Name", "Status", "User", "Group");
+
     int i;
     for (i = 0; i < numDirectories; i++) {
         char path[BUFFER_LEN];
@@ -94,7 +96,6 @@ int main() {
             }
         }
 
-        printf("%-15s\t%-15s\t%-15s\t%-15s\t%-15s\n", "PID", "Name", "Status", "User", "Group");
         printf("%-15s\t%-15s\t%-15s\t%-15s\t%-15s\n", processInfo[0], processInfo[1], processInfo[2], processInfo[3], processInfo[4]);
         fclose(process);
     }
