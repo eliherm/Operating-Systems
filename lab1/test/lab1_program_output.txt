@@ -1,0 +1,33 @@
+Script started on Fri 27 Sep 2019 06:54:39 PM EDT
+student@ELEC377-Student:~/E377-Wed-49/lab1$ ./lab1
+PID                 	Name                	Status              	User                	Group               
+------------------------------------------------------------------------------------------------------
+1                   	init                	S (sleeping)        	0                   	0                   
+2                   	keventd             	S (sleeping)        	0                   	0                   
+3                   	ksoftirqd_CPU0      	S (sleeping)        	0                   	0                   
+4                   	kswapd              	S (sleeping)        	0                   	0                   
+5                   	bdflush             	S (sleeping)        	0                   	0                   
+6                   	kupdated            	S (sleeping)        	0                   	0                   
+10                  	mdrecoveryd         	S (sleeping)        	0                   	0                   
+11                  	kjournald           	S (sleeping)        	0                   	0                   
+59                  	syslogd             	S (sleeping)        	0                   	0                   
+62                  	klogd               	S (sleeping)        	0                   	0                   
+167                 	dhcpcd              	S (sleeping)        	0                   	0                   
+1545                	khubd               	S (sleeping)        	0                   	0                   
+1568                	inetd               	S (sleeping)        	0                   	0                   
+1575                	crond               	S (sleeping)        	0                   	0                   
+1578                	sendmail            	S (sleeping)        	0                   	25                  
+1581                	sendmail            	S (sleeping)        	25                  	25                  
+1585                	bash                	S (sleeping)        	1000                	100                 
+1586                	agetty              	S (sleeping)        	0                   	0                   
+1587                	agetty              	S (sleeping)        	0                   	0                   
+1588                	agetty              	S (sleeping)        	0                   	0                   
+1589                	agetty              	S (sleeping)        	0                   	0                   
+1590                	agetty              	S (sleeping)        	0                   	0                   
+1722                	script              	S (sleeping)        	1000                	100                 
+1723                	script              	R (running)         	1000                	100                 
+1724                	bash                	S (sleeping)        	1000                	100                 
+1725                	lab1                	R (running)         	1000                	100                 
+student@ELEC377-Student:~/E377-Wed-49/lab1$ exit
+
+Script done on Fri 27 Sep 2019 06:54:46 PM EDT
