@@ -15,19 +15,19 @@ PID                 	Name                	Status              	User             
 167                 	dhcpcd              	S (sleeping)        	0                   	0                   
 1545                	khubd               	S (sleeping)        	0                   	0                   
 1568                	inetd               	S (sleeping)        	0                   	0                   
-1575                	crond               	S (sleeping)        	0                   	0                   
+1575                	crond               	S (sleeping)        	0                   	0                  
 1578                	sendmail            	S (sleeping)        	0                   	25                  
 1581                	sendmail            	S (sleeping)        	25                  	25                  
 1585                	bash                	S (sleeping)        	1000                	100                 
 1586                	agetty              	S (sleeping)        	0                   	0                   
 1587                	agetty              	S (sleeping)        	0                   	0                   
-1588                	agetty              	S (sleeping)        	0                   	0                   
+1588                	agetty              	S (sleeping)        	0                   	0                  
 1589                	agetty              	S (sleeping)        	0                   	0                   
 1590                	agetty              	S (sleeping)        	0                   	0                   
 1722                	script              	S (sleeping)        	1000                	100                 
 1723                	script              	R (running)         	1000                	100                 
 1724                	bash                	S (sleeping)        	1000                	100                 
-1725                	lab1                	R (running)         	1000                	100                 
+1725                	lab1                	R (running)         	1000                	100
 student@ELEC377-Student:~/E377-Wed-49/lab1$ exit
 
 Script done on Fri 27 Sep 2019 06:54:46 PM EDT
