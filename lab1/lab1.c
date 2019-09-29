@@ -1,5 +1,7 @@
 /*+
  * lab1.c - Print process information
+ * Hermann Krohn | 20057435
+ * Elikem Hermon | 20075527
 -*/
 
 #include <stdio.h>
