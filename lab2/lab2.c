@@ -12,10 +12,19 @@
 
 static struct task_struct * firstTask, *lastTask;
 
-int cnt;
+// int cnt;
 
 int my_read_proc(char * page, char **start, off_t fpos, int blen, int * eof, void * data) {
+  int numChars;
+  if (fpos > 0) {
+    numChars = 0
+  } else {
+    numChars = sprintf(page, "Hello World\n");
+  }
 
+  return numChars;
+
+/*
     int numChars;
     if (fpos == 0) {
       // write headers
@@ -36,6 +45,7 @@ int my_read_proc(char * page, char **start, off_t fpos, int blen, int * eof, voi
     *eof = 1;
     *start = page;
     return numChars;
+    */
 }
 
 int init_module() {
