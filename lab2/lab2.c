@@ -17,7 +17,7 @@ static struct task_struct * firstTask, *lastTask;
 int my_read_proc(char * page, char **start, off_t fpos, int blen, int * eof, void * data) {
   int numChars;
   if (fpos > 0) {
-    numChars = 0
+    numChars = 0;
   } else {
     numChars = sprintf(page, "Hello World\n");
   }
