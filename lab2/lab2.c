@@ -10,11 +10,44 @@
 #include <linux/proc_fs.h>
 #include <linux/sched.h>
 
-static struct task_struct * firstTask, *lastTask;
+#define NR_THREADS_LOC 0xc038b3a8
 
+static struct task_struct * firstTask, *lastTask;
 // int cnt;
 
 int my_read_proc(char * page, char **start, off_t fpos, int blen, int * eof, void * data) {
+  int numChars = 0;
+  if (fpos == 0) {
+    // Get the value of nr_threads
+    int* nr_threads = (int*) NR_THREADS_LOC;
+
+    // write headers
+    numChars += sprintf(page, "Number of running processes: %d\n", nr_running);
+    numChars += sprintf(page, "Number of running threads: %d\n", *nr_threads);
+
+    // find first task
+      // write first task
+      // advance to next task
+  } else {
+    *eof = 0;
+    *start = page;
+    return 0;
+    /*
+      if (at back at begining of list) {
+          *eof = 0;
+          *start = page;
+          return 0;
+      }
+    */
+    // write task info for one task
+    // advance to next task
+  }
+
+  *eof = 1;
+  *start = page;
+  return numChars;
+
+  /*
   int numChars;
   if (fpos > 0) {
     numChars = 0;
@@ -23,29 +56,7 @@ int my_read_proc(char * page, char **start, off_t fpos, int blen, int * eof, voi
   }
 
   return numChars;
-
-/*
-    int numChars;
-    if (fpos == 0) {
-      // write headers
-      sprintf(page, "Hello World\n");
-
-	    // find first task
-        // write first task
-        // advance to next task
-    } else {
-        if (at back at begining of list) {
-            *eof = 0;
-            *start = page;
-            return 0;
-        }
-	    // write task info for one task
-	    // advance to next task
-    }
-    *eof = 1;
-    *start = page;
-    return numChars;
-    */
+  */
 }
 
 int init_module() {
