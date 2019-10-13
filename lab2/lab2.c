@@ -23,7 +23,7 @@ int my_read_proc(char * page, char **start, off_t fpos, int blen, int * eof, voi
 
     // write headers
     numChars += sprintf(page, "Number of running processes: %d\n", nr_running);
-    numChars += sprintf(page, "Number of running threads: %d\n", *nr_threads);
+    // numChars += sprintf(page, "Number of running threads: %d\n", *nr_threads);
 
     // find first task
       // write first task
@@ -32,6 +32,7 @@ int my_read_proc(char * page, char **start, off_t fpos, int blen, int * eof, voi
     *eof = 0;
     *start = page;
     return 0;
+
     /*
       if (at back at begining of list) {
           *eof = 0;
