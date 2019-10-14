@@ -37,7 +37,7 @@ int my_read_proc(char *page, char **start, off_t fpos, int blen, int *eof, void 
     } else {
         while (numChars < blen) {
             // Check for the beginning of the list
-            if (lastTask == firstTask) {
+            if (lastTask == &init_task) {
                 *eof = 0;
                 *start = page;
                 return 0;
