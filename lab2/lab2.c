@@ -15,7 +15,7 @@ int my_read_proc(char *page, char **start, off_t fpos, int blen, int *eof, void 
     int numChars = 0;
 
     if (fpos == 0) {
-        // Get the value of nr_threads
+        // Get the number of running threads
         int *num_threads = (int*) NR_THREADS_LOC;
 
         // Write headers
@@ -28,12 +28,14 @@ int my_read_proc(char *page, char **start, off_t fpos, int blen, int *eof, void 
         lastTask = firstTask;
 
         // Write first task
-        numChars += sprintf(page + numChars, "%d\t%d\t%d\n", firstTask->pid, firstTask->uid, firstTask->nice);
+        if (firstTask->pid != 0) {
+            numChars += sprintf(page + numChars, "%d\t%d\t%d\n", firstTask->pid, firstTask->uid, firstTask->nice);
+        }
 
         // Advance to next task
         lastTask = lastTask->next_task;
     } else {
-        // Check for the beginning of the list
+        // Check if the current task has already been processed
         if (lastTask == firstTask) {
             *eof = 0;
             *start = page;
