@@ -19,7 +19,7 @@ int my_read_proc(char *page, char **start, off_t fpos, int blen, int *eof, void 
         int *nr_threads = (int*) NR_THREADS_LOC;
 
         // Write headers
-        numChars += sprintf(page, "Number of running processes: %d\n", NR_RUNNING);
+        numChars += sprintf(page, "Number of running processes: %d\n", nr_running);
         numChars += sprintf(page + numChars, "Number of running threads: %d\n", *nr_threads);
         numChars += sprintf(page + numChars, "PID\tUID\tNICE\n");
 
