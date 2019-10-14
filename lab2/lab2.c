@@ -10,7 +10,6 @@
 #define NR_THREADS_LOC 0xc038b3a8
 
 static struct task_struct *firstTask, *lastTask;
-int totalChar = 0;
 
 int my_read_proc(char *page, char **start, off_t fpos, int blen, int *eof, void *data) {
     int numChars = 0;
@@ -29,8 +28,7 @@ int my_read_proc(char *page, char **start, off_t fpos, int blen, int *eof, void 
         lastTask = firstTask;
 
         // Write first task
-        numChars += sprintf(page + numChars, "%d\t%d\t%d\n", firstTask->pid, firstTask->tgid, firstTask->nice);
-        totalChar += numChars;
+        numChars += sprintf(page + numChars, "%d\t%d\t%d\n", firstTask->pid, firstTask->uid, firstTask->nice);
 
         // Advance to next task
         lastTask = lastTask->next_task;
@@ -44,8 +42,7 @@ int my_read_proc(char *page, char **start, off_t fpos, int blen, int *eof, void 
 
         if (lastTask->pid != 0) {
             // write task info for one task
-            numChars += sprintf(page + totalChar, "%d\t%d\t%d\n", lastTask->pid, lastTask->tgid, lastTask->nice);
-            totalChar += numChars;
+            numChars += sprintf(page, "%d\t%d\t%d\n", lastTask->pid, lastTask->uid, lastTask->nice);
         }
         
         // Advance to next task
