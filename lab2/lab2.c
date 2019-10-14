@@ -35,23 +35,21 @@ int my_read_proc(char *page, char **start, off_t fpos, int blen, int *eof, void 
         // Advance to next task
         lastTask = lastTask->next_task;
     } else {
-        while (numChars < blen) {
-            // Check for the beginning of the list
-            if (lastTask == &init_task) {
-                *eof = 0;
-                *start = page;
-                return 0;
-            }
-
-            if (lastTask->pid != 0) {
-                // write task info for one task
-                numChars += sprintf(page + totalChar, "%d\t%d\t%d\n", lastTask->pid, lastTask->tgid, lastTask->nice);
-                totalChar += numChars;
-            }
-            
-            // Advance to next task
-            lastTask = lastTask->next_task;
+        // Check for the beginning of the list
+        if (lastTask == firstTask) {
+            *eof = 0;
+            *start = page;
+            return 0;
         }
+
+        if (lastTask->pid != 0) {
+            // write task info for one task
+            numChars += sprintf(page + totalChar, "%d\t%d\t%d\n", lastTask->pid, lastTask->tgid, lastTask->nice);
+            totalChar += numChars;
+        }
+        
+        // Advance to next task
+        lastTask = lastTask->next_task;
     }
 
     *eof = 1;
