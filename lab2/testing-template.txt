@@ -1,0 +1,8 @@
+# Show running processes
+ps -A --no-headers -o thcount | wc -l
+
+# Show running threads
+ps -A --no-headers | wc -l
+
+# Show processes with pid, uid and nice
+ps -Ao pid,uid,nice

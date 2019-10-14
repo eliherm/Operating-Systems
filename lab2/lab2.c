@@ -1,8 +1,5 @@
 /*+
  * Module:  lab2.c
- *
- * Purpose: Skeleton solution to ELEC 377 Lab2.
- *
 -*/
 
 #include <linux/kernel.h>
@@ -12,81 +9,69 @@
 
 #define NR_THREADS_LOC 0xc038b3a8
 
-static struct task_struct * firstTask, *lastTask;
-// int cnt;
+static struct task_struct *firstTask, *lastTask;
 
-int my_read_proc(char * page, char **start, off_t fpos, int blen, int * eof, void * data) {
-  int numChars = 0;
-  if (fpos == 0) {
-    // Get the value of nr_threads
-    int* nr_threads = (int*) NR_THREADS_LOC;
+int my_read_proc(char *page, char **start, off_t fpos, int blen, int *eof, void *data) {
+    int numChars = 0;
 
-    // write headers
-    numChars += sprintf(page, "Number of running processes: %d\n", nr_running);
-    numChars += sprintf(page, "Number of running threads: %d\n", *nr_threads);
-    numChars += sprintf(page, "PID\tUID\tNICE\n");
+    if (fpos == 0) {
+        // Get the value of nr_threads
+        int *nr_threads = (int*) NR_THREADS_LOC;
 
-    // find first task
-    firstTask = &init_tasks;
-    lastTask = firstTask;
+        // Write headers
+        numChars += sprintf(page, "Number of running processes: %d\n", nr_running);
+        numChars += sprintf(page, "Number of running threads: %d\n", *nr_threads);
+        numChars += sprintf(page, "PID\tUID\tNICE\n");
 
-    // write first task
-    numChars += sprintf(page, "%d\t%d\t%d\n", firstTask->pid, firstTask->tgid, firstTask->nice);
+        // Find first task
+        firstTask = &init_task;
+        lastTask = firstTask;
 
-    // advance to next task
-    firstTask = firstTask->next_task;
-    lastTask = firstTask;
-  } else {
+        // Write first task
+        numChars += sprintf(page, "%d\t%d\t%d\n", firstTask->pid, firstTask->tgid, firstTask->nice);
 
-      if (at back at begining of list) {
-          *eof = 0;
-          *start = page;
-          return 0;
-      }
+        // Advance to next task
+        lastTask = lastTask->next_task;
+    } else {
+        while (numChars < blen) {
+            // Check for the beginning of the list
+            if (lastTask == firstTask) {
+                *eof = 0;
+                *start = page;
+                return 0;
+            }
 
-    // write task info for one task
-    // advance to next task
-  }
+            if (lastTask->pid != 0) {
+                // write task info for one task
+                numChars += sprintf(page, "%d\t%d\t%d\n", firstTask->pid, firstTask->tgid, firstTask->nice);
+            }
+            
+            // Advance to next task
+            lastTask = lastTask->next_task;
+        }
+    }
 
-  *eof = 1;
-  *start = page;
-  return numChars;
-
-  /*
-  int numChars;
-  if (fpos > 0) {
-    numChars = 0;
-  } else {
-    numChars = sprintf(page, "Hello World\n");
-  }
-
-  return numChars;
-  */
+    *eof = 1;
+    *start = page;
+    return numChars;
 }
 
 int init_module() {
-   struct proc_dir_entry * proc_entry;
-   proc_entry = create_proc_entry("lab2", 0444, NULL); // Create the proc entry
+    struct proc_dir_entry *proc_entry;
+    proc_entry = create_proc_entry("lab2", 0444, NULL); // Create the proc entry
 
-   // Check if the entry could not be created
-   if (proc_entry == NULL) {
-     remove_proc_entry("lab2", &proc_root);
-     return -ENOMEM;
-   }
+    // Check if the entry could not be created
+    if (proc_entry == NULL) {
+        remove_proc_entry("lab2", &proc_root);
+        return -ENOMEM;
+    }
 
-   // Initialize the entry
-   proc_entry->read_proc = my_read_proc;
-
-   /*
-   proc_entry->owner = THIS_MODULE;
-   proc_entry->mode = S_IFREG | S_IRUGO;
-   proc_entry->uid = 0
-   proc_entry->gid = 0
-   proc_entry->size = 0*/
-
-   return 0;
+    // Initialize the entry
+    proc_entry->read_proc = my_read_proc;
+    return 0;
 }
 
 void cleanup_module() {
-  remove_proc_entry("lab2", &proc_root);
+    // Remove the module
+    remove_proc_entry("lab2", &proc_root);
 }
