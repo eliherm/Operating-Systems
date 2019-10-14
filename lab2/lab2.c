@@ -28,7 +28,7 @@ int my_read_proc(char *page, char **start, off_t fpos, int blen, int *eof, void 
         lastTask = firstTask;
 
         // Write first task
-        numChars += sprintf(page + numChars, "%d\t%d\t%d\n", firstTask->pid, firstTask->tgid, firstTask->nice);
+        numChars += sprintf(page + numChars, "%d\t%d\t%d\n", firstTask->pid, firstTask->pgrp, firstTask->nice);
 
         // Advance to next task
         lastTask = lastTask->next_task;
