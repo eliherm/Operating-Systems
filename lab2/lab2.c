@@ -43,7 +43,7 @@ int my_read_proc(char *page, char **start, off_t fpos, int blen, int *eof, void 
 
             if (lastTask->pid != 0) {
                 // write task info for one task
-                numChars += sprintf(page + numChars, "%d\t%d\t%d\n", firstTask->pid, firstTask->tgid, firstTask->nice);
+                numChars += sprintf(page + numChars, "%d\t%d\t%d\n", lastTask->pid, lastTask->tgid, lastTask->nice);
             }
             
             // Advance to next task
