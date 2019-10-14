@@ -20,15 +20,15 @@ int my_read_proc(char *page, char **start, off_t fpos, int blen, int *eof, void 
 
         // Write headers
         numChars += sprintf(page, "Number of running processes: %d\n", nr_running);
-        numChars += sprintf(page, "Number of running threads: %d\n", *nr_threads);
-        numChars += sprintf(page, "PID\tUID\tNICE\n");
+        numChars += sprintf(page + numChars, "Number of running threads: %d\n", *nr_threads);
+        numChars += sprintf(page + numChars, "PID\tUID\tNICE\n");
 
         // Find first task
         firstTask = &init_task;
         lastTask = firstTask;
 
         // Write first task
-        numChars += sprintf(page, "%d\t%d\t%d\n", firstTask->pid, firstTask->tgid, firstTask->nice);
+        numChars += sprintf(page + numChars, "%d\t%d\t%d\n", firstTask->pid, firstTask->tgid, firstTask->nice);
 
         // Advance to next task
         lastTask = lastTask->next_task;
@@ -43,7 +43,7 @@ int my_read_proc(char *page, char **start, off_t fpos, int blen, int *eof, void 
 
             if (lastTask->pid != 0) {
                 // write task info for one task
-                numChars += sprintf(page, "%d\t%d\t%d\n", firstTask->pid, firstTask->tgid, firstTask->nice);
+                numChars += sprintf(page + numChars, "%d\t%d\t%d\n", firstTask->pid, firstTask->tgid, firstTask->nice);
             }
             
             // Advance to next task
