@@ -1,4 +1,4 @@
-# Show running processes
+p# Show running processes
 ps -A --no-headers -o thcount | wc -l
 
 # Show running threads
