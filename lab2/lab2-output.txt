@@ -1,0 +1,62 @@
+Script started on Sun 20 Oct 2019 09:18:27 PM EDT
+student@ELEC377-Student:~/E377-Wed-49/lab2$ ps -Ao pid,uid,nice
+  PID   UID  NI
+    1     0   0
+    2     0   0
+    3     0  19
+    4     0   0
+    5     0   0
+    6     0   0
+   10     0 -20
+   11     0   0
+   59     0   0
+   62     0   0
+  167     0   0
+ 1545     0   0
+ 1568     0   0
+ 1575     0   0
+ 1578     0   0
+ 1581    25   0
+ 1585  1000   0
+ 1586     0   0
+ 1587     0   0
+ 1588     0   0
+ 1589     0   0
+ 1590     0   0
+ 3396  1000   0
+ 3397  1000   0
+ 3398  1000   0
+ 3399  1000   0
+ 
+student@ELEC377-Student:~/E377-Wed-49/lab2$ cat /proc/lab2
+Number of running processes: 1
+Number of running threads: 114
+PID		UID		NICE
+1		0		0
+2		0		0
+3		0		19
+4		0		0
+5		0		0
+6		0		0
+10		0		-20
+11		0		0
+59		0		0
+62		0		0
+167		0		0
+1545	0		0
+1568	0		0
+1575	0		0
+1578	0		0
+1581	25		0
+1585	1000	0
+1586	0		0
+1587	0		0
+1588	0		0
+1589	0		0
+1590	0		0
+3396	1000	0
+3397	1000	0
+3398	1000	0
+3400	1000	0
+student@ELEC377-Student:~/E377-Wed-49/lab2$ exit
+Script done on Sun 20 Oct 2019 09:19:00 PM EDT
