@@ -1,5 +1,5 @@
 Script started on Sun 20 Oct 2019 09:07:54 PM EDT
-student@ELEC377-Student:~/E377-Wed-49/lab2$ ps -a Ao pid,uid,nice
+student@ELEC377-Student:~/E377-Wed-49/lab2$ ps -Ao pid,uid,nice
   PID   UID  NI
     1     0   0
     2     0   0
