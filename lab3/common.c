@@ -19,7 +19,6 @@
 #define TRUE 1
 
 static struct shared *sharedptr;
-initialized = 0;
 
 int test_and_set(int * lock){
     return __cmpxchg(lock,0,1,4);
@@ -28,14 +27,14 @@ int test_and_set(int * lock){
 
 void mutexInit(struct shared *memptr){
     // TODO: initialize the only mutex once, from the producer... 
-    if(initialized == 0) {
-        sharedptr = memptr;
+    sharedptr = memptr;
+    if(sharedptr->initialized == 0) {
         sharedptr->lock = FALSE;
         sharedptr->numProducers = 0;
         sharedptr->in = 0;
         sharedptr->out = 0;
         sharedptr->count = 0;
-        initialized = 1;
+        sharedptr->initialized = 1;
     }
     
 }
@@ -45,23 +44,23 @@ void mutexInit(struct shared *memptr){
 void getMutex(short pid){
 	// this should not return until it has mutual exclusion. Note that many versions of 
 	// this will probobly be running at the same time.
-    waiting[pid] = TRUE;
+    sharedptr->waiting[pid] = TRUE;
     int key = TRUE;
-    while(waiting[pid] && key){
-        key = test_and_set(sharedptr->lock);
+    while(sharedptr->waiting[pid] && key){
+        key = test_and_set(&sharedptr->lock);
     }
-    waiting[pid] = FALSE;
+    sharedptr->waiting[pid] = FALSE;
 }
 
 void releaseMutex(short pid){
 	// set the mutex back to initial state so that somebody else can claim it
     short nextPid = (pid + 1) % NUMPROCS;
-    while((nextPid != pid) && (!waiting[nextPid]))
+    while((nextPid != pid) && (!sharedptr->waiting[nextPid]))
         nextPid = (nextPid + 1) % NUMPROCS;
     if(pid == nextPid){
         sharedptr->lock = FALSE;
     }else{
-        waiting[nextPid] = FALSE;
+        sharedptr->waiting[nextPid] = FALSE;
     }
 }
 

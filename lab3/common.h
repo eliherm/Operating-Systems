@@ -11,12 +11,11 @@
 #define BUFFSIZE 5
 #define NUMPROCS 5
 
-int initialized;
-
 struct shared {
     // synchronization variables
     int waiting[NUMPROCS];
     int lock;
+    int initialized;
 
     int numProducers;
     // queue variables

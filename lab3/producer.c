@@ -53,6 +53,10 @@ int main (int argc, char *argv[]){
 	    exit(1);
 	}
 	
+	if (shmid == 0) {
+		memptr->initialized = 0;
+	}
+
 	mutexInit(memptr);
 
 	getMutex(pid);
@@ -62,7 +66,7 @@ int main (int argc, char *argv[]){
 
 	do{
 		int currChar = getChar();
-		int stored = FALSE;
+		stored = FALSE;
 		while(stored == FALSE){
 			getMutex(pid);
 			if(memptr->count < BUFFSIZE){
