@@ -38,7 +38,6 @@ int main (int argc, char *argv[]){
         exit(1);
     }
 
-
 	/*	 Shared memory init 	*/
 	key = ftok(".", 'S');
 	if((shmid = shmget(key, MEMSIZE, IPC_CREAT|0666)) == -1 ){
@@ -56,7 +55,28 @@ int main (int argc, char *argv[]){
 	
 	mutexInit(memptr);
 
-    // put your code here..
+	getMutex(pid);
+	// Update the number of producers in shared memory
+	memptr->numProducers++;
+	releaseMutex(pid);
+
+	do{
+		int currChar = getChar();
+		int stored = FALSE;
+		while(stored == FALSE){
+			getMutex(pid);
+			if(memptr->count < BUFFSIZE){
+				memptr->buffer[memptr->in] = currChar;
+				memptr->in = (memptr->in + 1) % BUFFSIZE;
+				stored = TRUE;
+			}
+			releaseMutex(pid);
+		}
+	} while(currChar != EOF);
+	
+	getMutex(pid);
+	memptr->numProducers--;
+	releaseMutex(pid);
 
 	return 0;
 }
