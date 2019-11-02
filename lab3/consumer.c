@@ -74,8 +74,9 @@ int main (int argc, char *argv[]){
 				retrieved = TRUE;
 			}
 			releaseMutex(pid);
-			putchar(currChar);
 		}
+
+		putchar(currChar);
 	}
 
 	return 0;
