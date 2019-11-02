@@ -66,7 +66,7 @@ int main (int argc, char *argv[]){
 
 	int currChar;
 	do{
-		currChar = getChar();
+		currChar = getchar();
 		stored = FALSE;
 		while(stored == FALSE){
 			getMutex(pid);
