@@ -28,15 +28,6 @@ int test_and_set(int * lock){
 void mutexInit(struct shared *memptr){
     // TODO: initialize the only mutex once, from the producer... 
     sharedptr = memptr;
-    if(sharedptr->initialized == 0) {
-        sharedptr->lock = FALSE;
-        sharedptr->numProducers = 0;
-        sharedptr->in = 0;
-        sharedptr->out = 0;
-        sharedptr->count = 0;
-        sharedptr->initialized = 1;
-    }
-    
 }
 
 

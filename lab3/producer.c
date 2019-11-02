@@ -52,12 +52,6 @@ int main (int argc, char *argv[]){
 	    printf("Couldn't map the memory into our process space.\n");
 	    exit(1);
 	}
-	
-	printf("%d", shmid);
-
-	if (shmid == 0) {
-		memptr->initialized = 0;
-	}
 
 	mutexInit(memptr);
 
