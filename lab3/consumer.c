@@ -30,7 +30,7 @@ int main (int argc, char *argv[]){
         exit(1);
     }
     // no error checking...
-    pid = atoi(argv[1]);
+    int pid = atoi(argv[1]);
     if (pid < 0 || pid >= NUMPROCS){
         fprintf(stderr,"pid between 0 and %d\n",NUMPROCS-1);
         exit(1);
