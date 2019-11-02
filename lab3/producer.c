@@ -61,8 +61,7 @@ int main (int argc, char *argv[]){
 	releaseMutex(pid);
 
 	int currChar;
-	do{
-		currChar = getchar();
+	while((currChar = getchar()) != EOF){
 		stored = FALSE;
 		while(stored == FALSE){
 			getMutex(pid);
@@ -74,7 +73,7 @@ int main (int argc, char *argv[]){
 			}
 			releaseMutex(pid);
 		}
-	} while(currChar != EOF);
+	}
 	
 	getMutex(pid);
 	memptr->numProducers--;
