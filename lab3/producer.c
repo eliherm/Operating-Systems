@@ -69,6 +69,7 @@ int main (int argc, char *argv[]){
 			if(memptr->count < BUFFSIZE){
 				memptr->buffer[memptr->in] = currChar;
 				memptr->in = (memptr->in + 1) % BUFFSIZE;
+				memptr->count++;
 				stored = TRUE;
 			}
 			releaseMutex(pid);
