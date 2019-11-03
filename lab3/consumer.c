@@ -55,26 +55,34 @@ int main (int argc, char *argv[]) {
 	
 	mutexInit(memptr);
 
-	while(1) {
+	while (1) {
 		getMutex(pid);
 		
 		if ((memptr->count == 0) && (memptr->numProducers == 0)) {
 			releaseMutex(pid);
 			break;
 		}
-
-		char currChar = memptr->buffer[memptr->out];
-		memptr->out = (memptr->out + 1) % BUFFSIZE;
 		releaseMutex(pid);
 
 		int retrieved = FALSE;
+		char currChar;
 		while (retrieved == FALSE) {
 			getMutex(pid);
-			memptr->count--;
-			retrieved = TRUE;
+			if (memptr->count > 0) {
+				currChar = memptr->buffer[memptr->out];
+				memptr->count--;
+				memptr->out = (memptr->out + 1) % BUFFSIZE;
+				retrieved = TRUE;
+			}
+
+			if (memptr->numProducers == 0) {
+				releaseMutex(pid);
+				break;
+			}
+			
 			releaseMutex(pid);
 		}
-
+	
 		putchar(currChar);
 	}
 
