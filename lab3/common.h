@@ -16,8 +16,8 @@ struct shared {
     int waiting[NUMPROCS];
     int lock;
     int initialized;
-
     int numProducers;
+    
     // queue variables
     char buffer[BUFFSIZE];
     int in;
