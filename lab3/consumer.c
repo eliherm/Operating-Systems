@@ -68,18 +68,18 @@ int main (int argc, char *argv[]) {
 		char currChar;
 		while (retrieved == FALSE) {
 			getMutex(pid);
-			if (memptr->count > 0) {
+			if (memptr->count != 0) {
 				currChar = memptr->buffer[memptr->out];
 				memptr->count--;
 				memptr->out = (memptr->out + 1) % BUFFSIZE;
 				retrieved = TRUE;
 			}
-
+			
+			printf("%d", memptr->numProducers);
 			if (memptr->numProducers == 0) {
 				releaseMutex(pid);
 				break;
 			}
-			
 			releaseMutex(pid);
 		}
 	

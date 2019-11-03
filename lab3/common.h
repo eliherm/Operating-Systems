@@ -17,14 +17,13 @@ struct shared {
     int lock;
     int initialized;
     int numProducers;
-    
+
     // queue variables
     char buffer[BUFFSIZE];
     int in;
     int out;
     int count;
 };
-
 
 void mutexInit(struct shared *memptr);
 void getMutex(short pid);

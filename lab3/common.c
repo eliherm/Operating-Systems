@@ -12,7 +12,6 @@
 #include <stdlib.h>
 #include <asm/system.h>
 
-
 #include "common.h"
 
 #define FALSE 0
@@ -24,13 +23,10 @@ int test_and_set(int * lock){
     return __cmpxchg(lock,0,1,4);
 }
 
-
 void mutexInit(struct shared *memptr){
-    // TODO: initialize the only mutex once, from the producer... 
+    // initialize the only mutex once, from the producer... 
     sharedptr = memptr;
 }
-
-
 
 void getMutex(short pid){
 	// this should not return until it has mutual exclusion. Note that many versions of 
@@ -54,4 +50,3 @@ void releaseMutex(short pid){
         sharedptr->waiting[nextPid] = FALSE;
     }
 }
-
