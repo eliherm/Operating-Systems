@@ -75,7 +75,6 @@ int main (int argc, char *argv[]) {
 				retrieved = TRUE;
 			}
 			
-			printf("%d", memptr->numProducers);
 			if (memptr->numProducers == 0) {
 				releaseMutex(pid);
 				break;
