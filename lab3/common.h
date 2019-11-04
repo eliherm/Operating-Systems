@@ -15,7 +15,6 @@ struct shared {
     // synchronization variables
     int waiting[NUMPROCS];
     int lock;
-    int initialized;
     int numProducers;
 
     // queue variables
