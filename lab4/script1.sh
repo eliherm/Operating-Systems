@@ -9,7 +9,7 @@ for process in /proc/[0-9]*; do
 	rss=`grep "VmRSS" $process"/status" | sed -e 's/.*\t *//' ` | sed -e 's/KB//'
 
 	# Check for empty rss values
-	if [ -z "$rss" ]; then
+	if [[ $rss == "" ]]; then
 		rss="0"
 	fi
 
