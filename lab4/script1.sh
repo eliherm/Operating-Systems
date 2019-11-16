@@ -3,7 +3,7 @@
 # Print the heading
 awk 'BEGIN { printf "%-10s%-10s%-10s%-10s\n", "PID", "USER", "RSS", "COMMAND"; }'
 
-for process in /proc/[0-9]*; do
+for process in `ls -v /proc/[0-9]*`; do
     # Retrieve the pid from the directory name
     pid=${process/\/proc\//}
     
