@@ -9,8 +9,8 @@ for process in /proc/[0-9]*; do
 	rss=`grep "VmRSS" $process"/status"`
 
 	if [ -n "$rss" ]; then
-        rss=${rss/'VmRSS:'/}
-        rss=${rss/'kB'/}
+        rss=${rss/'VmRSS:\t'/}
+        rss=${rss/'kB\t\t'/}
 	fi
 	
 	cmd=`cat $process"/cmdline" | tr '\0' ' '`
