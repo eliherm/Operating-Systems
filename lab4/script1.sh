@@ -10,9 +10,9 @@ for process in /proc/[0-9]*; do
 
 	# Check for empty rss values
 	if [ -z "$rss" ]; then
-		rss=0
+		rss="0"
 	fi
-	
+
 	cmd=`cat $process"/cmdline" | tr '\0' ' '`
 	awk -v pid="$pid" -v user="$user" -v rss="$rss" -v cmd="$cmd" 'BEGIN { printf "%-10s%-10s%-10s%-10s\n", pid, user, rss, cmd }'
 done
