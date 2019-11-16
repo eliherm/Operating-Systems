@@ -9,5 +9,6 @@ for process in /proc/[0-9]*; do
 	user=`grep '.*:.*:'$userId':.*' "/etc/passwd" | sed -e 's/:.*//'`
 	rss=`grep "VmRSS" $process"/status" | sed -e 's/.*\t//'`
 	cmd=`cat $process"/cmdline" | tr '\0' ' '`
-	awk -v pid="$pid" -v user="$user" -v rss="$rss" -v cmd="$cmd" 'BEGIN { printf "%-10s%-10s%-10s%-10s\n", pid, user, rss, cmd }'
+	echo $user
+	#awk -v pid="$pid" -v user="$user" -v rss="$rss" -v cmd="$cmd" 'BEGIN { printf "%-10s%-10s%-10s%-10s\n", pid, user, rss, cmd }'
 done
