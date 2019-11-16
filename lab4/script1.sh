@@ -23,7 +23,7 @@ for process in /proc/[0-9]*; do
 	
 	# Check if the command is empty
 	if [ -z "$cmd" ];then
-	    cmd=`grep 'Name' $process'/status'` | sed -e 's/.*\t *//'
+	    cmd=`grep 'Name' $process'/status' | sed -e 's/.*\t *//'`
 	    cmd=[$cmd]
 	fi
 	
