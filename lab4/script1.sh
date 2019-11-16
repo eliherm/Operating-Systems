@@ -6,7 +6,7 @@
 for process in /proc/[0-9]*; do
 	pid=`echo $process | sed -e 's/\/proc\///'`
 	userId=`grep "Uid" $process"/status" | sed -e 's/.*\t//'`
-	user=`grep '.*:.*:'$userId':.*' "/etc/passwd" | sed -e 's/:.*//'`
+	user=`grep '.*:.*:'$userId':.*' "/etc/passwd"
 	rss=`grep "VmRSS" $process"/status" | sed -e 's/.*\t//'`
 	cmd=`cat $process"/cmdline" | tr '\0' ' '`
 	echo $user
