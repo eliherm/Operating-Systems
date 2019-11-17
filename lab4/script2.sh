@@ -18,7 +18,7 @@ for file in `find $1 -type f -name '*.c'`; do
         printk_lines=`grep -wn 'printk' $file | sed -e 's/:.*//' | tr '\n' ','`
         module_files="${module_files}${file/$1/}: ${printk_lines%,}\n"
     else
-        other_files+="${other_files}${file/$1/}\n"
+        other_files="${other_files}${file/$1/}\n"
     fi
 done
 
