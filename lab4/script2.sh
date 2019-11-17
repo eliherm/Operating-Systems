@@ -41,5 +41,5 @@ if [ -n "$other_files" ]; then
     printf "\nOther Files:\n"
     printf "$other_files"
 else
-    printf "No other file"
+    printf "No other file\n"
 fi
