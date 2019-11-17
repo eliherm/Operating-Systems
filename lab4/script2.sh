@@ -5,6 +5,7 @@ module_files=""
 other_files=""
 
 for file in `find $1 -type f -name '*.c'`; do
+    # Obtain the full file path
     file_path=`readlink -f $file`
 
     # Check for the main function
@@ -13,9 +14,10 @@ for file in `find $1 -type f -name '*.c'`; do
         printf_count=`grep -wc 'printf' $file`
         fprintf_count=`grep -wc 'fprintf' $file`
         main_files="${main_files}${file_path}: $printf_count,$fprintf_count\n"
+    fi
 
     # Check for the init_module function
-    elif grep -q 'int init_module *(.*)' $file; then
+    if grep -q 'int init_module *(.*)' $file; then
         # Find lines containing printk
         printk_lines=`grep -wn 'printk' $file | sed -e 's/:.*//' | tr '\n' ','`
         module_files="${module_files}${file_path}: ${printk_lines%,}\n"
