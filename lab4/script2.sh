@@ -9,7 +9,7 @@ for file in `find $1 -type f -name '*.c'`; do
     if grep -q 'int main *(.*)' $file; then
         printf_count=`grep -wc 'printf' $file`
         fprintf_count=`grep -wc 'fprintf' $file`
-        main_files+=${file/$1/}: $printf_count, $fprintf_count\n
+        main_files+='${file/$1/}: $printf_count, $fprintf_count\n'
 
     # Check for the init_module function
     elif grep -q 'int init_module *(.*)' $file; then
@@ -33,7 +33,7 @@ if [ -n "$module_files" ]; then
     printf "\nModule Files:\n"
     printf "$module_files"
 else
-    printf "No module file"
+    printf "No module file\n"
 fi
 
 # Output other source files
