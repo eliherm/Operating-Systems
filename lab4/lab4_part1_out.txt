@@ -28,7 +28,8 @@ student@ELEC377-Student:~/E377-Wed-49/lab4$ ps -eo pid,user,rss,args
 11422 student   592 script lab4_part1_out.txt
 11423 student  1448 bash -i
 11446 student   768 ps -eo pid,user,rss,args
-student@ELEC377-Student:~/E377-Wed-49/lab4$ ps -eo pid,user,rss,argsexit[Kbash script1.sh
+
+student@ELEC377-Student:~/E377-Wed-49/lab4$ bash script1.sh
 PID       USER      RSS       COMMAND   
 1         root      240       init [3]   
 2         root      0         [keventd] 
