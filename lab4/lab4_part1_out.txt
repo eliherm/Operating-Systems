@@ -1,5 +1,5 @@
 Script started on Sun 17 Nov 2019 09:30:54 PM EST
-student@ELEC377-Student:~/E377-Wed-49/lab4$ ps eo -  -eoeo pid,user,rss,args
+student@ELEC377-Student:~/E377-Wed-49/lab4$ ps -eo pid,user,rss,args
   PID USER      RSS COMMAND
     1 root      240 init [3]  
     2 root        0 [keventd]
@@ -28,6 +28,8 @@ student@ELEC377-Student:~/E377-Wed-49/lab4$ ps eo -  -eoeo pid,user,rss,
  9828 student   592 script lab4_part1_out.txt
  9829 student  1444 bash -i
  9830 student   768 ps -eo pid,user,rss,args
+ 
+ 
 student@ELEC377-Student:~/E377-Wed-49/lab4$ bash script1.sh
 PID       USER      RSS       COMMAND   
 1         root      240       init [3]   
