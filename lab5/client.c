@@ -102,4 +102,3 @@ void Attack(FILE *outfile){
     fprintf(outfile,compromise);
     fflush(outfile);
 }
-
