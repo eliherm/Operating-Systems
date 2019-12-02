@@ -101,8 +101,9 @@ char * compromise1 =
     "xxxxxxxxxxxxxxxxxxxx"
     "xxxxxxxxxxxxxxxxxxxx"
     "xxxxxxxxxxxxxxxxxxxx"
-    "xxxxxxxxxxxxxxxxxxxx"
-    "WXYZ";
+    "xxxx"
+    "WXYZ"
+    "x";
 
 char compromise[130] = {
     'h','e','l','l','o',' ','t','h','e','r','e','\n'
