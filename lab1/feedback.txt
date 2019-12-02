@@ -1,5 +1,0 @@
-Documentation:40
-Structure & Clarity:20
-Testing:40
-Total:100
-Good report and code
