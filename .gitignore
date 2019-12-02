@@ -1,2 +1,5 @@
 # MacOs finder preferences
 .DS_Store
+
+# VSCode preferences
+.vscode/
